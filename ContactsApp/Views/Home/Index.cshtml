@@ -1,0 +1,110 @@
+﻿@model ContactsApp.Models.ContactsViewModel
+@{
+    ViewBag.Title = "Contacts Page";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>Contact Form and Contact List Page</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h4>Add Contacts</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "contactForm" }))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(m => m.PhNo)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextBoxFor(m => m.PhNo, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(m => m.Email)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    @Html.HiddenFor(m => m.LoggedInUserID)
+                </div>
+            </div>
+            if (ViewBag.Error == "")
+            {
+
+            }
+            else
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-10">
+                        <span style="font-size:15pt;">@ViewBag.Error</span>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+    <div class="col-md-4">
+       
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h3>My Contacts</h3>
+        <table id="tblContacts" class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
+                    <th style="text-align:center">
+                        Name
+                    </th>
+                    <th style="text-align:center">
+                        Ph No
+                    </th>
+                    <th style="text-align:center">
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.PhNo</td>
+                        <td>@item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
